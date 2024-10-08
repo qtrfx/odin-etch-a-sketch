@@ -1,0 +1,18 @@
+
+
+:root {
+    --dark-background: rgb(24, 33, 42);
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+}
+
+body {
+    max-width: 100%;
+    width: 100vw;
+    min-height: 100vh;
+    background-color: rgb(24, 33, 42);
+}
