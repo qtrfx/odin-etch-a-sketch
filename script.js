@@ -3,8 +3,9 @@ const changeTileSizeButton = document.querySelector(".change-tile-size-button");
 const resetSketchButton = document.querySelector(".reset-sketch-button");
 
 const GRID_DIMENSIONS = 960;
-
 let tileSize = 50;
+
+drawGrid(tileSize);
 
 function drawGrid(tileSize) {
     gridContainer.replaceChildren();
@@ -17,12 +18,11 @@ function drawGrid(tileSize) {
     }
 }
 
-drawGrid(tileSize);
-
 function resetGrid() {
-    const gridList = document.querySelectorAll(".blue");
+    const gridList = document.querySelectorAll(".grid-tile");
     gridList.forEach((tile) => {
-        tile.classList.remove("blue");
+        tile.classList.remove("color");
+        tile.style.backgroundColor = "unset";
     });
 }
 
@@ -45,8 +45,21 @@ function changeTileSize(event) {
 
 function tintTile(event) {
     if (event.target.className === "grid-tile") {
-        event.target.classList.add("blue");
+        if (!event.target.classList.contains("color")) {
+            event.target.classList.add("color");
+            event.target.style.backgroundColor = getRandomColor();
+        }
     }
+}
+
+// Generates a random RGB color to apply to uncolored tiles that
+// have been hovered over.
+function getRandomColor() {
+    const red = Math.floor(Math.random() * 256);
+    const green = Math.floor(Math.random() * 256);
+    const blue = Math.floor(Math.random() * 256);
+
+    return `rgb(${red}, ${green}, ${blue})`;
 }
 
 gridContainer.addEventListener("mouseover", tintTile);
