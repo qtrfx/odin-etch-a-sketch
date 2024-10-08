@@ -1,5 +1,6 @@
 const gridContainer = document.querySelector(".app-container");
 const changeTileSizeButton = document.querySelector(".change-tile-size-button");
+const resetSketchButton = document.querySelector(".reset-sketch-button");
 
 let tileSize = 50;
 
@@ -18,14 +19,19 @@ function drawGrid(tileSize) {
 }
 
 drawGrid(tileSize);
-gridContainer.addEventListener("mouseover", (event) => {
-    console.log(event.target.className);
+
+function resetGrid() {
+    const gridList = document.querySelectorAll(".blue");
+    gridList.forEach((tile) => {
+        tile.classList.remove("blue");
+    });
+}
     if (event.target.className === "grid-tile") {
         event.target.classList.add("blue");
     }
-});
+}
 
 changeTileSizeButton.addEventListener("click", (event) => {
     tileSize = prompt("Enter your desired grid size: (1-100)");
     drawGrid(tileSize);
-});
+});resetSketchButton.addEventListener("click", resetGrid);
