@@ -1,7 +1,8 @@
 const gridContainer = document.querySelector(".app-container");
+const changeTileSizeButton = document.querySelector(".change-tile-size-button");
 
-for (let i = 0; i < 16; i++) {
-    const gridTile = document.createElement("div");
-    gridTile.classList.add("grid-tile");
-    gridContainer.appendChild(gridTile);
 }
+changeTileSizeButton.addEventListener("click", (event) => {
+    tileSize = prompt("Enter your desired grid size: (1-100)");
+    drawGrid(tileSize);
+});
