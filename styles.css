@@ -5,7 +5,7 @@
 }
 
 * {
-    box-sizing: border-box;
+
     padding: 0px;
     margin: 0px;
 }
@@ -19,14 +19,16 @@ body {
     width: 100vw;
     min-height: 100vh;
     background-color: rgb(24, 33, 42);
+    gap: 10px;
 }
 
 .app-container {
     display: flex;
-    background-color: palegoldenrod;
+    background-color: rgba(255, 255, 255, 0.25 );
     flex-wrap: wrap;
     max-width: 960px;
     max-height: 960px;
+    border: 5px solid rgb(110, 132, 255);
 
 }
 
