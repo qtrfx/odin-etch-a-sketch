@@ -7,6 +7,7 @@ let tileSize = 50;
 
 drawGrid(tileSize);
 
+// Creates grid tiles based on the tile size given.
 function drawGrid(tileSize) {
     gridContainer.replaceChildren();
     for (let i = 0; i < tileSize * tileSize; i++) {
@@ -18,6 +19,7 @@ function drawGrid(tileSize) {
     }
 }
 
+// Removes the color from all tiles.
 function resetGrid() {
     const gridList = document.querySelectorAll(".grid-tile");
     gridList.forEach((tile) => {
@@ -26,6 +28,7 @@ function resetGrid() {
     });
 }
 
+// Asks the user for their desired grid size.
 function changeTileSize(event) {
     let gridSizePrompt = "Enter your desired grid size. (1-100)";
 
@@ -43,6 +46,7 @@ function changeTileSize(event) {
     drawGrid(tileSize);
 }
 
+// Colors grid tiles if they've not been colored yet.
 function tintTile(event) {
     if (event.target.className === "grid-tile") {
         if (!event.target.classList.contains("color")) {
