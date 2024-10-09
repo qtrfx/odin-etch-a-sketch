@@ -24,7 +24,7 @@ body {
 
 .grid-container {
     display: flex;
-    background-color: rgba(255, 255, 255, 0.25 );
+    background-color: white;
     flex-wrap: wrap;
     max-width: 960px;
     max-height: 960px;
