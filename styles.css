@@ -22,7 +22,7 @@ body {
     gap: 10px;
 }
 
-.app-container {
+.grid-container {
     display: flex;
     background-color: rgba(255, 255, 255, 0.25 );
     flex-wrap: wrap;
@@ -33,16 +33,33 @@ body {
 }
 
 button {
-    padding: 15px 30px;
+    padding: 15px 15px;
     background-color: rgb(125, 152, 182);
     border: 2px solid white;
     border-radius: 5px;
     font-weight: bold;
     color: white;
-    width: 200px;
+
+
     
 }
 
 .toggleActive {
     border-color: yellow;
+}
+
+.app-container {
+    display: flex;
+    gap: 10px;
+}
+
+.controls-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 150px;
+}
+
+.spacer {
+    width: 150px;
 }

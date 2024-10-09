@@ -1,11 +1,11 @@
-const gridContainer = document.querySelector(".app-container");
+const gridContainer = document.querySelector(".grid-container");
 const changeTileSizeButton = document.querySelector(".change-tile-size-button");
 const resetSketchButton = document.querySelector(".reset-sketch-button");
 const toggleRainbowModeButton = document.querySelector(
     ".rainbow-toggle-button"
 );
 const toggleOpacityButton = document.querySelector(".opacity-toggle-button");
-const buttonContainer = document.querySelector(".button-container");
+const buttonContainer = document.querySelector(".controls-container");
 
 const GRID_DIMENSIONS = 960;
 const RAINBOW_COLORS = {
