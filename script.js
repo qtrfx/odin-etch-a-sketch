@@ -50,6 +50,7 @@ function drawGrid(tileSize) {
         gridTile.style.height = `${GRID_DIMENSIONS / tileSize}px`;
         gridTile.style.width = `${GRID_DIMENSIONS / tileSize}px`;
         gridTile.style.userSelect = "none";
+        if (showGridlines) gridTile.classList.add("show-gridlines");
         gridContainer.appendChild(gridTile);
     }
     currentRainbowColor = 0;
