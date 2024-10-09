@@ -13,6 +13,7 @@ function drawGrid(tileSize) {
     for (let i = 0; i < tileSize * tileSize; i++) {
         const gridTile = document.createElement("div");
         gridTile.classList.add("grid-tile");
+        gridTile.style.opacity = 0;
         gridTile.style.height = `${GRID_DIMENSIONS / tileSize}px`;
         gridTile.style.width = `${GRID_DIMENSIONS / tileSize}px`;
         gridContainer.appendChild(gridTile);
@@ -25,6 +26,7 @@ function resetGrid() {
     gridList.forEach((tile) => {
         tile.classList.remove("color");
         tile.style.backgroundColor = "unset";
+        tile.style.opacity = 0;
     });
 }
 
@@ -47,11 +49,15 @@ function changeTileSize(event) {
 }
 
 // Colors grid tiles if they've not been colored yet.
-function tintTile(event) {
-    if (event.target.className === "grid-tile") {
-        if (!event.target.classList.contains("color")) {
-            event.target.classList.add("color");
-            event.target.style.backgroundColor = getRandomColor();
+function tintTile({ target }) {
+    if (target.classList.contains("grid-tile")) {
+        if (target.style.opacity < 1)
+            target.style.opacity =
+                roundToTwoDecimals(target.style.opacity) + 0.1;
+
+        if (!target.classList.contains("color")) {
+            target.classList.add("color");
+            target.style.backgroundColor = getRandomColor();
         }
     }
 }
@@ -64,6 +70,10 @@ function getRandomColor() {
     const blue = Math.floor(Math.random() * 256);
 
     return `rgb(${red}, ${green}, ${blue})`;
+}
+
+function roundToTwoDecimals(numberToRound) {
+    return Math.floor(numberToRound * 10) / 10;
 }
 
 gridContainer.addEventListener("mouseover", tintTile);
