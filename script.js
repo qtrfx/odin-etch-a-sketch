@@ -4,6 +4,7 @@ const resetSketchButton = document.querySelector(".reset-sketch-button");
 const toggleRainbowModeButton = document.querySelector(
     ".rainbow-toggle-button"
 );
+const toggleOpacityButton = document.querySelector(".opacity-toggle-button");
 
 const GRID_DIMENSIONS = 960;
 const RAINBOW_COLORS = {
@@ -16,6 +17,7 @@ const RAINBOW_COLORS = {
 };
 let tileSize = 50;
 let rainbowMode = false;
+let opacityMode = false;
 
 drawGrid(tileSize);
 
@@ -62,15 +64,19 @@ function changeTileSize(event) {
 }
 
 // Colors grid tiles if they've not been colored yet.
-function tintTile({ target }) {
-    if (target.classList.contains("grid-tile")) {
-        if (target.style.opacity < 1)
-            target.style.opacity =
-                roundToTwoDecimals(target.style.opacity) + 0.1;
+function tintTile(event) {
+    if (event.target.classList.contains("grid-tile")) {
+        if (opacityMode) {
+            if (event.target.style.opacity < 1)
+                event.target.style.opacity =
+                    roundToTwoDecimals(event.target.style.opacity) + 0.1;
+        } else {
+            event.target.style.opacity = 1;
+        }
 
-        if (!target.classList.contains("color")) {
-            target.classList.add("color");
-            target.style.backgroundColor = getRandomColor();
+        if (!event.target.classList.contains("color")) {
+            event.target.classList.add("color");
+            event.target.style.backgroundColor = getRandomColor();
         }
     }
 }
@@ -100,6 +106,3 @@ function toggleRainbowMode() {
 }
 
 gridContainer.addEventListener("mouseover", tintTile);
-changeTileSizeButton.addEventListener("click", changeTileSize);
-resetSketchButton.addEventListener("click", resetGrid);
-toggleRainbowModeButton.addEventListener("click", toggleRainbowMode);
