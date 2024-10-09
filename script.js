@@ -33,6 +33,12 @@ let showGridlines = false;
 
 drawGrid(tileSize);
 
+gridContainer.addEventListener("mousemove", tintTile);
+buttonContainer.addEventListener("click", handleButtonClick);
+colorPicker.addEventListener("change", changeColor);
+bodyReference.addEventListener("mousedown", toggleLeftClickActive);
+bodyReference.addEventListener("mouseup", toggleLeftClickActive);
+
 // Creates grid tiles based on the tile size given by calculating tile
 // dimensons to fit.
 function drawGrid(tileSize) {
@@ -92,14 +98,14 @@ function tintTile(event) {
 
         if (!event.target.classList.contains("color")) {
             event.target.classList.add("color");
-            event.target.style.backgroundColor = getRandomColor();
+            event.target.style.backgroundColor = getColor();
         }
     }
 }
 
 // Generates a random RGB color to apply to uncolored tiles that
 // have been hovered over.
-function getRandomColor() {
+function getColor() {
     let color;
     if (rainbowMode) {
         const rainBowColors = Object.values(RAINBOW_COLORS);
@@ -145,13 +151,6 @@ function toggleRandomColors() {
     }
 }
 
-function changeColor() {
-    rainbowMode = false;
-    randomColorMode = false;
-    toggleRainbowModeButton.classList.remove("toggleActive");
-    toggleRandomColorButton.classList.remove("toggleActive");
-}
-
 function toggleLeftClickActive(event) {
     if (event.button === 0) {
         if (event.type === "mousedown") isLeftButtonHeldDown = true;
@@ -164,6 +163,13 @@ function toggleGridlines() {
     Array.from(gridContainer.children).forEach((tile) => {
         tile.classList.toggle("show-gridlines");
     });
+}
+
+function changeColor() {
+    rainbowMode = false;
+    randomColorMode = false;
+    toggleRainbowModeButton.classList.remove("toggleActive");
+    toggleRandomColorButton.classList.remove("toggleActive");
 }
 
 function handleButtonClick({ target: buttonClicked, button: clickId }) {
@@ -189,9 +195,3 @@ function handleButtonClick({ target: buttonClicked, button: clickId }) {
             break;
     }
 }
-
-gridContainer.addEventListener("mousemove", tintTile);
-buttonContainer.addEventListener("click", handleButtonClick);
-colorPicker.addEventListener("change", changeColor);
-bodyReference.addEventListener("mousedown", toggleLeftClickActive);
-bodyReference.addEventListener("mouseup", toggleLeftClickActive); 
