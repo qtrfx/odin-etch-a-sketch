@@ -1,9 +1,21 @@
 const gridContainer = document.querySelector(".app-container");
 const changeTileSizeButton = document.querySelector(".change-tile-size-button");
 const resetSketchButton = document.querySelector(".reset-sketch-button");
+const toggleRainbowModeButton = document.querySelector(
+    ".rainbow-toggle-button"
+);
 
 const GRID_DIMENSIONS = 960;
+const RAINBOW_COLORS = {
+    red: "rgb(228,3,3)",
+    orange: "rgb(255,140,0)",
+    yellow: "rgb(255,237,0)",
+    green: "rgb(0,128,38)",
+    blue: "rgb(0,76,255)",
+    purple: "rgb(115,41,130)",
+};
 let tileSize = 50;
+let rainbowMode = false;
 
 drawGrid(tileSize);
 
@@ -66,17 +78,28 @@ function tintTile({ target }) {
 // Generates a random RGB color to apply to uncolored tiles that
 // have been hovered over.
 function getRandomColor() {
-    const red = Math.floor(Math.random() * 256);
-    const green = Math.floor(Math.random() * 256);
-    const blue = Math.floor(Math.random() * 256);
-
-    return `rgb(${red}, ${green}, ${blue})`;
+    let color;
+    if (rainbowMode) {
+        const rainBowColors = Object.values(RAINBOW_COLORS);
+        color = rainBowColors[Math.floor(Math.random() * rainBowColors.length)];
+    } else {
+        const red = Math.floor(Math.random() * 256);
+        const green = Math.floor(Math.random() * 256);
+        const blue = Math.floor(Math.random() * 256);
+        color = `rgb(${red}, ${green}, ${blue})`;
+    }
+    return color;
 }
 
 function roundToTwoDecimals(numberToRound) {
     return Math.floor(numberToRound * 10) / 10;
 }
 
+function toggleRainbowMode() {
+    rainbowMode = !rainbowMode;
+}
+
 gridContainer.addEventListener("mouseover", tintTile);
 changeTileSizeButton.addEventListener("click", changeTileSize);
 resetSketchButton.addEventListener("click", resetGrid);
+toggleRainbowModeButton.addEventListener("click", toggleRainbowMode);
