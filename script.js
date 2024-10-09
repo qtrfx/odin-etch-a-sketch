@@ -5,6 +5,7 @@ const toggleRainbowModeButton = document.querySelector(
     ".rainbow-toggle-button"
 );
 const toggleOpacityButton = document.querySelector(".opacity-toggle-button");
+const buttonContainer = document.querySelector(".button-container");
 
 const GRID_DIMENSIONS = 960;
 const RAINBOW_COLORS = {
@@ -103,6 +104,31 @@ function roundToTwoDecimals(numberToRound) {
 
 function toggleRainbowMode() {
     rainbowMode = !rainbowMode;
+    toggleRainbowModeButton.classList.toggle("toggleActive");
+}
+
+function toggleOpacity() {
+    opacityMode = !opacityMode;
+    toggleOpacityButton.classList.toggle("toggleActive");
+}
+
+function handleButtonClick({ target: buttonClicked, button: clickId }) {
+    if (clickId !== 0) return;
+    switch (buttonClicked) {
+        case changeTileSizeButton:
+            changeTileSize();
+            break;
+        case resetSketchButton:
+            resetGrid();
+            break;
+        case toggleRainbowModeButton:
+            toggleRainbowMode();
+            break;
+        case toggleOpacityButton:
+            toggleOpacity();
+            break;
+    }
 }
 
 gridContainer.addEventListener("mouseover", tintTile);
+buttonContainer.addEventListener("click", handleButtonClick);
