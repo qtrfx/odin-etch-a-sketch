@@ -63,3 +63,12 @@ button {
 .spacer {
     width: 150px;
 }
+
+input {
+    width: 100%;
+    flex-basis: 1;
+    height: 50px;
+    border: 1px solid black;
+    outline: none;
+    
+}

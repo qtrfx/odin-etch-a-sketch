@@ -6,6 +6,10 @@ const toggleRainbowModeButton = document.querySelector(
 );
 const toggleOpacityButton = document.querySelector(".opacity-toggle-button");
 const buttonContainer = document.querySelector(".controls-container");
+const colorPicker = document.querySelector(".color-picker-input");
+const toggleRandomColorButton = document.querySelector(
+    ".random-color-toggle-button"
+);
 
 const GRID_DIMENSIONS = 960;
 const RAINBOW_COLORS = {
@@ -21,6 +25,7 @@ let currentRainbowColor = 0;
 let tileSize = 50;
 let rainbowMode = false;
 let opacityMode = false;
+let randomColorMode = false;
 
 drawGrid(tileSize);
 
@@ -97,11 +102,13 @@ function getRandomColor() {
         if (currentRainbowColor > 5) {
             currentRainbowColor = 0;
         }
-    } else {
+    } else if (randomColorMode) {
         const red = Math.floor(Math.random() * 256);
         const green = Math.floor(Math.random() * 256);
         const blue = Math.floor(Math.random() * 256);
         color = `rgb(${red}, ${green}, ${blue})`;
+    } else {
+        color = colorPicker.value;
     }
     return color;
 }
@@ -113,6 +120,10 @@ function roundToTwoDecimals(numberToRound) {
 function toggleRainbowMode() {
     rainbowMode = !rainbowMode;
     toggleRainbowModeButton.classList.toggle("toggleActive");
+    if (randomColorMode) {
+        randomColorMode = !randomColorMode;
+        toggleRandomColorButton.classList.toggle("toggleActive");
+    }
 }
 
 function toggleOpacity() {
@@ -120,6 +131,21 @@ function toggleOpacity() {
     toggleOpacityButton.classList.toggle("toggleActive");
 }
 
+function toggleRandomColors() {
+    randomColorMode = !randomColorMode;
+    toggleRandomColorButton.classList.toggle("toggleActive");
+    if (rainbowMode) {
+        rainbowMode = !rainbowMode;
+        toggleRainbowModeButton.classList.toggle("toggleActive");
+    }
+}
+
+function changeColor() {
+    rainbowMode = false;
+    randomColorMode = false;
+    toggleRainbowModeButton.classList.remove("toggleActive");
+    toggleRandomColorButton.classList.remove("toggleActive");
+}
 function handleButtonClick({ target: buttonClicked, button: clickId }) {
     if (clickId !== 0) return;
     switch (buttonClicked) {
@@ -135,8 +161,12 @@ function handleButtonClick({ target: buttonClicked, button: clickId }) {
         case toggleOpacityButton:
             toggleOpacity();
             break;
+        case toggleRandomColorButton:
+            toggleRandomColors();
+            break;
     }
 }
 
 gridContainer.addEventListener("mouseover", tintTile);
 buttonContainer.addEventListener("click", handleButtonClick);
+colorPicker.addEventListener("change", changeColor);
