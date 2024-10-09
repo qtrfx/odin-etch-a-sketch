@@ -10,6 +10,7 @@ const colorPicker = document.querySelector(".color-picker-input");
 const toggleRandomColorButton = document.querySelector(
     ".random-color-toggle-button"
 );
+const bodyReference = document.querySelector("body");
 
 const GRID_DIMENSIONS = 960;
 const RAINBOW_COLORS = {
@@ -26,6 +27,7 @@ let tileSize = 50;
 let rainbowMode = false;
 let opacityMode = false;
 let randomColorMode = false;
+let isLeftButtonHeldDown;
 
 drawGrid(tileSize);
 
@@ -76,6 +78,7 @@ function changeTileSize(event) {
 
 // Colors grid tiles if they've not been colored yet.
 function tintTile(event) {
+    if (!isLeftButtonHeldDown) return;
     if (event.target.classList.contains("grid-tile")) {
         if (opacityMode) {
             if (event.target.style.opacity < 1)
@@ -146,6 +149,16 @@ function changeColor() {
     toggleRainbowModeButton.classList.remove("toggleActive");
     toggleRandomColorButton.classList.remove("toggleActive");
 }
+
+function toggleLeftClickActive(event) {
+    if (event.button === 0) {
+        console.log(event.button);
+        console.log(event.type);
+        if (event.type === "mousedown") isLeftButtonHeldDown = true;
+        else isLeftButtonHeldDown = false;
+    }
+}
+
 function handleButtonClick({ target: buttonClicked, button: clickId }) {
     if (clickId !== 0) return;
     switch (buttonClicked) {
@@ -170,3 +183,5 @@ function handleButtonClick({ target: buttonClicked, button: clickId }) {
 gridContainer.addEventListener("mouseover", tintTile);
 buttonContainer.addEventListener("click", handleButtonClick);
 colorPicker.addEventListener("change", changeColor);
+bodyReference.addEventListener("mousedown", toggleLeftClickActive);
+bodyReference.addEventListener("mouseup", toggleLeftClickActive); 
