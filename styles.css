@@ -42,3 +42,7 @@ button {
     width: 200px;
     
 }
+
+.toggleActive {
+    border-color: yellow;
+}
