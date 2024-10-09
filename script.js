@@ -7,7 +7,8 @@ let tileSize = 50;
 
 drawGrid(tileSize);
 
-// Creates grid tiles based on the tile size given.
+// Creates grid tiles based on the tile size given by calculating tile 
+// dimensons to fit.
 function drawGrid(tileSize) {
     gridContainer.replaceChildren();
     for (let i = 0; i < tileSize * tileSize; i++) {
@@ -20,7 +21,7 @@ function drawGrid(tileSize) {
     }
 }
 
-// Removes the color from all tiles.
+// Resets tile styles to their defaults.
 function resetGrid() {
     const gridList = document.querySelectorAll(".grid-tile");
     gridList.forEach((tile) => {
