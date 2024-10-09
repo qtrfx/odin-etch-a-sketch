@@ -11,6 +11,7 @@ const toggleRandomColorButton = document.querySelector(
     ".random-color-toggle-button"
 );
 const bodyReference = document.querySelector("body");
+const toggleGridlinesButton = document.querySelector(".show-gridlines-button");
 
 const GRID_DIMENSIONS = 960;
 const RAINBOW_COLORS = {
@@ -28,17 +29,18 @@ let rainbowMode = false;
 let opacityMode = false;
 let randomColorMode = false;
 let isLeftButtonHeldDown;
+let showGridlines = false;
 
 drawGrid(tileSize);
 
-// Creates grid tiles based on the tile size given by calculating tile 
+// Creates grid tiles based on the tile size given by calculating tile
 // dimensons to fit.
 function drawGrid(tileSize) {
     gridContainer.replaceChildren();
     for (let i = 0; i < tileSize * tileSize; i++) {
         const gridTile = document.createElement("div");
         gridTile.classList.add("grid-tile");
-        gridTile.style.opacity = 0;
+        gridTile.style.opacity = 1;
         gridTile.style.height = `${GRID_DIMENSIONS / tileSize}px`;
         gridTile.style.width = `${GRID_DIMENSIONS / tileSize}px`;
         gridTile.style.userSelect = "none";
@@ -53,7 +55,7 @@ function resetGrid() {
     gridList.forEach((tile) => {
         tile.classList.remove("color");
         tile.style.backgroundColor = "unset";
-        tile.style.opacity = 0;
+        tile.style.opacity = 1;
     });
     currentRainbowColor = 0;
 }
@@ -152,11 +154,16 @@ function changeColor() {
 
 function toggleLeftClickActive(event) {
     if (event.button === 0) {
-        console.log(event.button);
-        console.log(event.type);
         if (event.type === "mousedown") isLeftButtonHeldDown = true;
         else isLeftButtonHeldDown = false;
     }
+}
+
+function toggleGridlines() {
+    showGridlines = !showGridlines;
+    Array.from(gridContainer.children).forEach((tile) => {
+        tile.classList.toggle("show-gridlines");
+    });
 }
 
 function handleButtonClick({ target: buttonClicked, button: clickId }) {
@@ -177,10 +184,13 @@ function handleButtonClick({ target: buttonClicked, button: clickId }) {
         case toggleRandomColorButton:
             toggleRandomColors();
             break;
+        case toggleGridlinesButton:
+            toggleGridlines();
+            break;
     }
 }
 
-gridContainer.addEventListener("mouseover", tintTile);
+gridContainer.addEventListener("mousemove", tintTile);
 buttonContainer.addEventListener("click", handleButtonClick);
 colorPicker.addEventListener("change", changeColor);
 bodyReference.addEventListener("mousedown", toggleLeftClickActive);

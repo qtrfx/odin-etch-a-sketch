@@ -72,3 +72,7 @@ input {
     outline: none;
     
 }
+
+.show-gridlines {
+    box-shadow: 0px 0px 0px 1px black;
+}
