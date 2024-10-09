@@ -16,6 +16,8 @@ const RAINBOW_COLORS = {
     blue: "rgb(0,76,255)",
     purple: "rgb(115,41,130)",
 };
+let currentRainbowColor = 0;
+
 let tileSize = 50;
 let rainbowMode = false;
 let opacityMode = false;
@@ -32,8 +34,10 @@ function drawGrid(tileSize) {
         gridTile.style.opacity = 0;
         gridTile.style.height = `${GRID_DIMENSIONS / tileSize}px`;
         gridTile.style.width = `${GRID_DIMENSIONS / tileSize}px`;
+        gridTile.style.userSelect = "none";
         gridContainer.appendChild(gridTile);
     }
+    currentRainbowColor = 0;
 }
 
 // Resets tile styles to their defaults.
@@ -44,6 +48,7 @@ function resetGrid() {
         tile.style.backgroundColor = "unset";
         tile.style.opacity = 0;
     });
+    currentRainbowColor = 0;
 }
 
 // Asks the user for their desired grid size.
@@ -88,7 +93,10 @@ function getRandomColor() {
     let color;
     if (rainbowMode) {
         const rainBowColors = Object.values(RAINBOW_COLORS);
-        color = rainBowColors[Math.floor(Math.random() * rainBowColors.length)];
+        color = rainBowColors[currentRainbowColor++];
+        if (currentRainbowColor > 5) {
+            currentRainbowColor = 0;
+        }
     } else {
         const red = Math.floor(Math.random() * 256);
         const green = Math.floor(Math.random() * 256);
