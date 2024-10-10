@@ -48,6 +48,8 @@ button {
 .app-container {
   display: flex;
   gap: 10px;
+
+  max-height: 960px;
 }
 
 .controls-container {
