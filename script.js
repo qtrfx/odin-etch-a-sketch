@@ -63,6 +63,7 @@ function drawGrid(tileSize) {
     tileContainer.style.width = tileDimensions;
 
     if (showGridlines) tileContainer.classList.add("show-gridlines");
+
     gridContainer.appendChild(tileContainer);
     tileContainer.appendChild(gridTile);
   }
@@ -191,6 +192,7 @@ function changeColor() {
   toggleRainbowModeButton.classList.remove("toggleActive");
   toggleRandomColorButton.classList.remove("toggleActive");
 }
+
 
 function handleButtonClick({ target: buttonClicked, button: clickId }) {
   if (clickId !== 0) return;
