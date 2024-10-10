@@ -27,7 +27,7 @@ const RAINBOW_COLORS = {
 };
 
 let currentRainbowColor = 0;
-let tileSize = 50;
+let tileSize = 32;
 let rainbowMode = false;
 let opacityMode = false;
 let randomColorMode = false;
