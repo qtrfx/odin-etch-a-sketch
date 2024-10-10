@@ -46,15 +46,19 @@ bodyReference.addEventListener("mouseup", toggleLeftClickActive);
 // dimensons to fit.
 function drawGrid(tileSize) {
   gridContainer.replaceChildren();
-  for (let i = 0; i < tileSize * tileSize; i++) {
+  for (let i = 1; i <= tileSize * tileSize; i++) {
+    const tileContainer = document.createElement("div");
     const gridTile = document.createElement("div");
     gridTile.classList.add("grid-tile");
-    gridTile.style.opacity = 1;
-    gridTile.style.height = `${GRID_DIMENSIONS / tileSize}px`;
-    gridTile.style.width = `${GRID_DIMENSIONS / tileSize}px`;
+    gridTile.style.opacity = 0;
     gridTile.style.userSelect = "none";
-    if (showGridlines) gridTile.classList.add("show-gridlines");
-    gridContainer.appendChild(gridTile);
+
+    tileContainer.style.height = `${GRID_DIMENSIONS / tileSize}px`;
+    tileContainer.style.width = `${GRID_DIMENSIONS / tileSize}px`;
+
+    if (showGridlines) tileContainer.classList.add("show-gridlines");
+    gridContainer.appendChild(tileContainer);
+    tileContainer.appendChild(gridTile);
   }
   currentRainbowColor = 0;
 }
