@@ -83,11 +83,15 @@ function changeTileSize() {
 // Colors grid tiles if they've not been colored yet.
 function tintTile(event) {
   if (!isLeftButtonHeldDown) return;
+  const color = getColor();
   if (event.target.classList.contains("grid-tile")) {
     if (opacityMode) {
       if (event.target.style.opacity < 1)
         event.target.style.opacity =
           roundToTwoDecimals(event.target.style.opacity) + 0.1;
+      if (event.target.style.backgroundColor != "") {
+        return;
+      }
     } else {
       event.target.style.opacity = 1;
     }
