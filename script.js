@@ -12,6 +12,9 @@ const toggleRandomColorButton = document.querySelector(
 );
 const bodyReference = document.querySelector("body");
 const toggleGridlinesButton = document.querySelector(".show-gridlines-button");
+const changeTileSizeDisplay = document.querySelector(
+  ".change-tile-size-display"
+);
 
 const GRID_DIMENSIONS = 960;
 const RAINBOW_COLORS = {
@@ -70,6 +73,7 @@ function resetGrid() {
 // Asks the user for their desired grid size.
 function changeTileSize() {
   drawGrid(changeTileSizeSlider.value);
+  changeTileSizeDisplay.innerText = `Grid Size: ${changeTileSizeSlider.value}/${changeTileSizeSlider.value}`;
 }
 
 // Colors grid tiles if they've not been colored yet.

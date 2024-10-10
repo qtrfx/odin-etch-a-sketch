@@ -75,6 +75,28 @@ input {
   box-sizing: border-box;
 }
 
-.grid-tile:hover {
+.change-tile-size-display {
+  color: white;
+  text-align: center;
+}
 
+
+.change-tile-size-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.change-tile-size-slider {
+  background-color: white;
+  appearance: none;
+  height: 4px;
+}
+
+.change-tile-size-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 5px;
+  height: 15px;
+  background-color: white;
+  border: 1px solid black;
 }
