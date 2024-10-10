@@ -84,10 +84,8 @@ function tintTile(event) {
       event.target.style.opacity = 1;
     }
 
-    if (!event.target.classList.contains("color")) {
-      event.target.classList.add("color");
-      event.target.style.backgroundColor = getColor();
-    }
+    event.target.classList.add("color");
+    event.target.style.backgroundColor = getColor();
   }
 }
 
