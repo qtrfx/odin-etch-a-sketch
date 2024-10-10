@@ -1,82 +1,75 @@
-
-
 :root {
-    --dark-background: rgb(24, 33, 42);
+  --dark-background: rgb(24, 33, 42);
 }
 
 * {
-
-    padding: 0px;
-    margin: 0px;
+  padding: 0px;
+  margin: 0px;
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    max-width: 100%;
-    width: 100vw;
-    min-height: 100vh;
-    background-color: rgb(24, 33, 42);
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+  width: 100vw;
+  min-height: 100vh;
+  background-color: rgb(24, 33, 42);
+  gap: 10px;
 }
 
 .grid-container {
-    display: flex;
-    background-color: white;
-    flex-wrap: wrap;
-    max-width: 960px;
-    max-height: 960px;
-    border: 5px solid rgb(110, 132, 255);
-
+  display: flex;
+  background-color: white;
+  flex-wrap: wrap;
+  max-width: 960px;
+  max-height: 960px;
+  border: 5px solid rgb(110, 132, 255);
 }
 
 button {
-    padding: 15px 15px;
-    background-color: rgb(125, 152, 182);
-    border: 2px solid white;
-    border-radius: 5px;
-    font-weight: bold;
-    color: white;
-    height: 50px;
-
-    
+  padding: 15px 15px;
+  background-color: rgb(125, 152, 182);
+  border: 2px solid white;
+  border-radius: 5px;
+  font-weight: bold;
+  color: white;
+  height: 50px;
 }
 
 .toggleActive {
-    border-color: yellow;
+  border-color: yellow;
 }
 
 .app-container {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 }
 
 .controls-container {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    width: 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 150px;
 }
 
 .spacer {
-    width: 150px;
+  width: 150px;
 }
 
 input {
-    width: 100%;
-    flex-basis: 1;
-    height: 50px;
-    border: 1px solid black;
-    outline: none;
-    
+  width: 100%;
+  flex-basis: 1;
+  height: 50px;
+  border: 1px solid black;
+  outline: none;
 }
 
 .show-gridlines {
-    border: 1px solid rgba(0,0,0,0.25);
+  border: 1px solid rgba(0, 0, 0, 0.25);
 }
 
 .grid-tile {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
