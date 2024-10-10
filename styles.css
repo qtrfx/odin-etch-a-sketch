@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=BioRhyme:wght@200..800&display=swap');
+
 :root {
   --dark-background: rgb(24, 33, 42);
 }
@@ -5,6 +7,7 @@
 * {
   padding: 0px;
   margin: 0px;
+  font-family: 'BioRhyme', sans-serif;
 }
 
 body {
@@ -30,8 +33,8 @@ body {
 
 button {
   padding: 15px 15px;
-  background-color: rgb(125, 152, 182);
-  border: 2px solid white;
+  background-color: rgba(39, 39, 39, 0.695);
+  border: 2px ridge black;
   border-radius: 5px;
   font-weight: bold;
   color: white;
@@ -51,7 +54,7 @@ button {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  width: 150px;
+  width: fit-content
 }
 
 .spacer {
