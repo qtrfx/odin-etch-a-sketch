@@ -66,8 +66,8 @@ function resetGrid() {
   const gridList = document.querySelectorAll(".grid-tile");
   gridList.forEach((tile) => {
     tile.classList.remove("color");
-    tile.style.backgroundColor = "unset";
-    tile.style.opacity = 1;
+    tile.style.backgroundColor = "";
+    tile.style.opacity = 0;
   });
   currentRainbowColor = 0;
 }
