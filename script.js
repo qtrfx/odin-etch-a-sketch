@@ -48,7 +48,9 @@ bodyReference.addEventListener("mouseup", toggleLeftClickActive);
 // dimensons to fit and wrapping them in a div to show consistent gridlines.
 function drawGrid(tileSize) {
   gridContainer.replaceChildren();
-  for (let i = 1; i <= tileSize * tileSize; i++) {
+  const tileDimensions = `${GRID_DIMENSIONS / tileSize}px`;
+
+  for (let i = 1; i <= tileSize ** 2; i++) {
     const tileContainer = document.createElement("div");
     const gridTile = document.createElement("div");
 
@@ -57,8 +59,8 @@ function drawGrid(tileSize) {
     // Prevents user from selecting text when leftclick dragging.
     gridTile.style.userSelect = "none";
 
-    tileContainer.style.height = `${GRID_DIMENSIONS / tileSize}px`;
-    tileContainer.style.width = `${GRID_DIMENSIONS / tileSize}px`;
+    tileContainer.style.height = tileDimensions;
+    tileContainer.style.width = tileDimensions;
 
     if (showGridlines) tileContainer.classList.add("show-gridlines");
     gridContainer.appendChild(tileContainer);
@@ -72,7 +74,6 @@ function drawGrid(tileSize) {
 function resetGrid() {
   const gridList = document.querySelectorAll(".grid-tile");
   gridList.forEach((tile) => {
-    tile.classList.remove("color");
     tile.style.backgroundColor = "";
     tile.style.opacity = 0;
   });
@@ -108,7 +109,6 @@ function tintTile(event) {
       event.target.style.opacity = 1;
     }
 
-    event.target.classList.add("color");
     event.target.style.backgroundColor = getColor();
   }
 }
