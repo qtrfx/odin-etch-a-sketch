@@ -54,7 +54,7 @@ button {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  width: fit-content
+  width: 160px;
 }
 
 .spacer {
