@@ -1,11 +1,11 @@
 const gridContainer = document.querySelector(".grid-container");
-const changeTileSizeButton = document.querySelector(".change-tile-size-button");
+const changeTileSizeSlider = document.querySelector(".change-tile-size-slider");
 const resetSketchButton = document.querySelector(".reset-sketch-button");
 const toggleRainbowModeButton = document.querySelector(
   ".rainbow-toggle-button"
 );
 const toggleOpacityButton = document.querySelector(".opacity-toggle-button");
-const buttonContainer = document.querySelector(".controls-container");
+const controlsContainer = document.querySelector(".controls-container");
 const colorPicker = document.querySelector(".color-picker-input");
 const toggleRandomColorButton = document.querySelector(
   ".random-color-toggle-button"
@@ -33,9 +33,9 @@ let showGridlines = false;
 
 drawGrid(tileSize);
 
-gridContainer.addEventListener("mousemove", tintTile);
-buttonContainer.addEventListener("click", handleButtonClick);
-colorPicker.addEventListener("change", changeColor);
+gridContainer.addEventListener("mouseover", tintTile);
+controlsContainer.addEventListener("click", handleButtonClick);
+controlsContainer.addEventListener("input", handleInputChange);
 bodyReference.addEventListener("mousedown", toggleLeftClickActive);
 bodyReference.addEventListener("mouseup", toggleLeftClickActive);
 
@@ -68,20 +68,8 @@ function resetGrid() {
 }
 
 // Asks the user for their desired grid size.
-function changeTileSize(event) {
-  let gridSizePrompt = "Enter your desired grid size. (1-100)";
-
-  while (true) {
-    const userInput = parseInt(prompt(gridSizePrompt));
-    if (userInput <= 100 && userInput > 0) {
-      tileSize = userInput;
-      break;
-    } else {
-      gridSizePrompt = "Invalid Input, please input a number between 1-100.";
-    }
-  }
-
-  drawGrid(tileSize);
+function changeTileSize() {
+  drawGrid(changeTileSizeSlider.value);
 }
 
 // Colors grid tiles if they've not been colored yet.
@@ -175,9 +163,6 @@ function changeColor() {
 function handleButtonClick({ target: buttonClicked, button: clickId }) {
   if (clickId !== 0) return;
   switch (buttonClicked) {
-    case changeTileSizeButton:
-      changeTileSize();
-      break;
     case resetSketchButton:
       resetGrid();
       break;
@@ -192,6 +177,17 @@ function handleButtonClick({ target: buttonClicked, button: clickId }) {
       break;
     case toggleGridlinesButton:
       toggleGridlines();
+      break;
+  }
+}
+
+function handleInputChange({ target: inputChanged }) {
+  switch (inputChanged) {
+    case changeTileSizeSlider:
+      changeTileSize();
+      break;
+    case colorPicker:
+      changeColor();
       break;
   }
 }
