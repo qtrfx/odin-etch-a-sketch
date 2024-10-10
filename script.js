@@ -14,6 +14,8 @@ const toggleGridlinesButton = document.querySelector(".show-gridlines-button");
 const changeTileSizeDisplay = document.querySelector(".change-tile-size-display");
 const toggleEraserButton = document.querySelector(".eraser-toggle-button");
 
+
+// Sketch dimensions in pixels.
 const GRID_DIMENSIONS = 960;
 const RAINBOW_COLORS = {
   red: "rgb(228,3,3)",
@@ -33,6 +35,7 @@ let isLeftButtonHeldDown;
 let showGridlines = false;
 let eraserMode = false;
 
+// Initialise first grid on page load.
 drawGrid(tileSize);
 
 gridContainer.addEventListener("mouseover", tintTile);
@@ -42,7 +45,7 @@ bodyReference.addEventListener("mousedown", handleLeftClick);
 bodyReference.addEventListener("mouseup", toggleLeftClickActive);
 
 // Creates grid tiles based on the tile size given by calculating tile
-// dimensons to fit.
+// dimensons to fit and wrapping them in a div to show consistent gridlines.
 function drawGrid(tileSize) {
   gridContainer.replaceChildren();
   for (let i = 1; i <= tileSize * tileSize; i++) {
@@ -51,6 +54,7 @@ function drawGrid(tileSize) {
 
     gridTile.classList.add("grid-tile");
     gridTile.style.opacity = 0;
+    // Prevents user from selecting text when leftclick dragging.
     gridTile.style.userSelect = "none";
 
     tileContainer.style.height = `${GRID_DIMENSIONS / tileSize}px`;
@@ -60,6 +64,7 @@ function drawGrid(tileSize) {
     gridContainer.appendChild(tileContainer);
     tileContainer.appendChild(gridTile);
   }
+  // Reset rainbow color mode on redrawing grid.
   currentRainbowColor = 0;
 }
 
@@ -74,7 +79,8 @@ function resetGrid() {
   currentRainbowColor = 0;
 }
 
-// Asks the user for their desired grid size.
+// Redraws grid with user specified input and updates the current tilesize on
+// the page.
 function changeTileSize() {
   drawGrid(changeTileSizeSlider.value);
   changeTileSizeDisplay.innerText = `Grid Size: ${changeTileSizeSlider.value}x${changeTileSizeSlider.value}`;
@@ -111,6 +117,8 @@ function tintTile(event) {
 // have been hovered over.
 function getColor() {
   let color;
+  // Iterates through the rainbow colors and loops on reaching the end, always
+  // giving them out in order.
   if (rainbowMode) {
     const rainBowColors = Object.values(RAINBOW_COLORS);
     color = rainBowColors[currentRainbowColor++];
@@ -118,6 +126,7 @@ function getColor() {
     if (currentRainbowColor > 5) {
       currentRainbowColor = 0;
     }
+    // Picks random RGB values and combines them into an RGB string to return
   } else if (randomColorMode) {
     const red = Math.floor(Math.random() * 256);
     const green = Math.floor(Math.random() * 256);
@@ -134,6 +143,7 @@ function roundToTwoDecimals(numberToRound) {
   return Math.floor(numberToRound * 10) / 10;
 }
 
+// Toggles rainbowmode and untoggles conflicting modes.
 function toggleRainbowMode() {
   rainbowMode = !rainbowMode;
   toggleRainbowModeButton.classList.toggle("toggleActive");
@@ -148,6 +158,7 @@ function toggleOpacity() {
   toggleOpacityButton.classList.toggle("toggleActive");
 }
 
+// Toggles random colors mode and untoggles conflicting modes.
 function toggleRandomColors() {
   randomColorMode = !randomColorMode;
   toggleRandomColorButton.classList.toggle("toggleActive");
@@ -157,6 +168,8 @@ function toggleRandomColors() {
   }
 }
 
+// Checks for left mouse button event and toggles on/off variable to use
+// for checking if the current tile should be tinted.
 function toggleLeftClickActive(event) {
   if (event.button === 0) {
     if (event.type === "mousedown") isLeftButtonHeldDown = true;
@@ -171,6 +184,7 @@ function toggleGridlines() {
   });
 }
 
+// Toggle off conflicting modes when user inputs a color through the color picker
 function changeColor() {
   rainbowMode = false;
   randomColorMode = false;
