@@ -73,7 +73,7 @@ function resetGrid() {
 // Asks the user for their desired grid size.
 function changeTileSize() {
   drawGrid(changeTileSizeSlider.value);
-  changeTileSizeDisplay.innerText = `Grid Size: ${changeTileSizeSlider.value}/${changeTileSizeSlider.value}`;
+  changeTileSizeDisplay.innerText = `Grid Size: ${changeTileSizeSlider.value}x${changeTileSizeSlider.value}`;
 }
 
 // Colors grid tiles if they've not been colored yet.
