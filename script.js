@@ -1,20 +1,17 @@
 const gridContainer = document.querySelector(".grid-container");
 const changeTileSizeSlider = document.querySelector(".change-tile-size-slider");
 const resetSketchButton = document.querySelector(".reset-sketch-button");
-const toggleRainbowModeButton = document.querySelector(
-  ".rainbow-toggle-button"
-);
+// prettier-ignore
+const toggleRainbowModeButton = document.querySelector(".rainbow-toggle-button");
 const toggleOpacityButton = document.querySelector(".opacity-toggle-button");
 const controlsContainer = document.querySelector(".controls-container");
 const colorPicker = document.querySelector(".color-picker-input");
-const toggleRandomColorButton = document.querySelector(
-  ".random-color-toggle-button"
-);
+// prettier-ignore
+const toggleRandomColorButton = document.querySelector(".random-color-toggle-button");
 const bodyReference = document.querySelector("body");
 const toggleGridlinesButton = document.querySelector(".show-gridlines-button");
-const changeTileSizeDisplay = document.querySelector(
-  ".change-tile-size-display"
-);
+// prettier-ignore
+const changeTileSizeDisplay = document.querySelector(".change-tile-size-display");
 
 const GRID_DIMENSIONS = 960;
 const RAINBOW_COLORS = {
@@ -25,8 +22,8 @@ const RAINBOW_COLORS = {
   blue: "rgb(0,76,255)",
   purple: "rgb(115,41,130)",
 };
-let currentRainbowColor = 0;
 
+let currentRainbowColor = 0;
 let tileSize = 50;
 let rainbowMode = false;
 let opacityMode = false;
@@ -49,6 +46,7 @@ function drawGrid(tileSize) {
   for (let i = 1; i <= tileSize * tileSize; i++) {
     const tileContainer = document.createElement("div");
     const gridTile = document.createElement("div");
+
     gridTile.classList.add("grid-tile");
     gridTile.style.opacity = 0;
     gridTile.style.userSelect = "none";
@@ -83,12 +81,13 @@ function changeTileSize() {
 // Colors grid tiles if they've not been colored yet.
 function tintTile(event) {
   if (!isLeftButtonHeldDown) return;
-  const color = getColor();
+
   if (event.target.classList.contains("grid-tile")) {
     if (opacityMode) {
-      if (event.target.style.opacity < 1)
+      if (event.target.style.opacity < 1) {
         event.target.style.opacity =
           roundToTwoDecimals(event.target.style.opacity) + 0.1;
+      }
       if (event.target.style.backgroundColor != "") {
         return;
       }
@@ -108,6 +107,7 @@ function getColor() {
   if (rainbowMode) {
     const rainBowColors = Object.values(RAINBOW_COLORS);
     color = rainBowColors[currentRainbowColor++];
+
     if (currentRainbowColor > 5) {
       currentRainbowColor = 0;
     }
@@ -115,6 +115,7 @@ function getColor() {
     const red = Math.floor(Math.random() * 256);
     const green = Math.floor(Math.random() * 256);
     const blue = Math.floor(Math.random() * 256);
+
     color = `rgb(${red}, ${green}, ${blue})`;
   } else {
     color = colorPicker.value;
