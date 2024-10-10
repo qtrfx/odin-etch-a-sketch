@@ -39,7 +39,7 @@ drawGrid(tileSize);
 gridContainer.addEventListener("mouseover", tintTile);
 controlsContainer.addEventListener("click", handleButtonClick);
 controlsContainer.addEventListener("input", handleInputChange);
-bodyReference.addEventListener("mousedown", toggleLeftClickActive);
+bodyReference.addEventListener("mousedown", handleLeftClick);
 bodyReference.addEventListener("mouseup", toggleLeftClickActive);
 
 // Creates grid tiles based on the tile size given by calculating tile
@@ -191,5 +191,12 @@ function handleInputChange({ target: inputChanged }) {
     case colorPicker:
       changeColor();
       break;
+  }
+}
+
+function handleLeftClick(event) {
+  toggleLeftClickActive(event);
+  if (event.target.classList.contains("grid-tile")) {
+    tintTile(event);
   }
 }
