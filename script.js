@@ -12,6 +12,7 @@ const bodyReference = document.querySelector("body");
 const toggleGridlinesButton = document.querySelector(".show-gridlines-button");
 // prettier-ignore
 const changeTileSizeDisplay = document.querySelector(".change-tile-size-display");
+const toggleEraserButton = document.querySelector(".eraser-toggle-button");
 
 const GRID_DIMENSIONS = 960;
 const RAINBOW_COLORS = {
@@ -30,6 +31,7 @@ let opacityMode = false;
 let randomColorMode = false;
 let isLeftButtonHeldDown;
 let showGridlines = false;
+let eraserMode = false;
 
 drawGrid(tileSize);
 
@@ -83,6 +85,11 @@ function tintTile(event) {
   if (!isLeftButtonHeldDown) return;
 
   if (event.target.classList.contains("grid-tile")) {
+    if (eraserMode) {
+      event.target.style.backgroundColor = "";
+      event.target.style.opacity = 0;
+      return;
+    }
     if (opacityMode) {
       if (event.target.style.opacity < 1) {
         event.target.style.opacity =
@@ -189,6 +196,8 @@ function handleButtonClick({ target: buttonClicked, button: clickId }) {
     case toggleGridlinesButton:
       toggleGridlines();
       break;
+    case toggleEraserButton:
+      toggleEraser();
   }
 }
 
@@ -208,4 +217,9 @@ function handleLeftClick(event) {
   if (event.target.classList.contains("grid-tile")) {
     tintTile(event);
   }
+}
+
+function toggleEraser() {
+  eraserMode = !eraserMode;
+  toggleEraserButton.classList.toggle("toggleActive");
 }
