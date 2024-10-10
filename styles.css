@@ -107,3 +107,9 @@ input {
   background-color: white;
   border: 1px solid black;
 }
+
+
+.site-header {
+  color: white;
+  font-size: 48px;
+}
