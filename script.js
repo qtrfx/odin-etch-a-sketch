@@ -14,9 +14,6 @@ const toggleGridlinesButton = document.querySelector(".show-gridlines-button");
 const changeTileSizeDisplay = document.querySelector(".change-tile-size-display");
 const toggleEraserButton = document.querySelector(".eraser-toggle-button");
 
-
-// Sketch dimensions in pixels.
-const GRID_DIMENSIONS = 960;
 const RAINBOW_COLORS = {
   red: "rgb(228,3,3)",
   orange: "rgb(255,140,0)",
@@ -27,7 +24,7 @@ const RAINBOW_COLORS = {
 };
 
 let currentRainbowColor = 0;
-let tileSize = 32;
+let gridDimensons = 32;
 let rainbowMode = false;
 let opacityMode = false;
 let randomColorMode = false;
@@ -36,7 +33,7 @@ let showGridlines = false;
 let eraserMode = false;
 
 // Initialise first grid on page load.
-drawGrid(tileSize);
+drawGrid(gridDimensons);
 
 gridContainer.addEventListener("mouseover", tintTile);
 controlsContainer.addEventListener("click", handleButtonClick);
@@ -46,29 +43,22 @@ bodyReference.addEventListener("mouseup", toggleLeftClickActive);
 
 // Creates grid tiles based on the tile size given by calculating tile
 // dimensons to fit and wrapping them in a div to show consistent gridlines.
-function drawGrid(tileSize) {
+function drawGrid(gridDimensons) {
   gridContainer.replaceChildren();
-  const tileDimensions = `${GRID_DIMENSIONS / tileSize}px`;
+  for (let i = 1; i <= gridDimensons; i++) {
+    const gridRow = document.createElement("div");
+    //randomColorMode = true; // just for testing;
+    gridRow.classList.add("grid-row");
 
-  for (let i = 1; i <= tileSize ** 2; i++) {
-    const tileContainer = document.createElement("div");
-    const gridTile = document.createElement("div");
+    for (let j = 1; j <= gridDimensons; j++) {
+      const gridTile = document.createElement("div");
 
-    gridTile.classList.add("grid-tile");
-    gridTile.style.opacity = 0;
-    // Prevents user from selecting text when leftclick dragging.
-    gridTile.style.userSelect = "none";
-
-    tileContainer.style.height = tileDimensions;
-    tileContainer.style.width = tileDimensions;
-
-    if (showGridlines) tileContainer.classList.add("show-gridlines");
-
-    gridContainer.appendChild(tileContainer);
-    tileContainer.appendChild(gridTile);
+      gridTile.classList.add("grid-tile");
+      gridRow.appendChild(gridTile);
+    }
+    gridContainer.appendChild(gridRow);
+    currentRainbowColor = 0;
   }
-  // Reset rainbow color mode on redrawing grid.
-  currentRainbowColor = 0;
 }
 
 // Resets tile styles to their defaults.
