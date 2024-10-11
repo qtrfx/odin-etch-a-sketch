@@ -18,16 +18,16 @@ body {
   max-width: 100%;
   width: 100vw;
   min-height: 100vh;
-  background-color: rgb(24, 33, 42);
+  background-color: var(--dark-background);
   gap: 10px;
 }
 
 .grid-container {
   display: flex;
   background-color: white;
-  flex-wrap: wrap;
-  max-width: 960px;
-  max-height: 960px;
+  flex-direction: column;
+  width: 960px;
+  height: 960px;
   border: 1px solid black;
 }
 
