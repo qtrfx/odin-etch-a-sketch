@@ -199,9 +199,6 @@ function handleButtonClick({ target: buttonClicked, button: clickId }) {
     case toggleRandomColorButton:
       toggleRandomColors();
       break;
-    case toggleGridlinesButton:
-      toggleGridlines();
-      break;
     case toggleEraserButton:
       toggleEraser();
   }
