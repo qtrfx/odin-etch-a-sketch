@@ -142,6 +142,7 @@ function toggleRainbowMode() {
     randomColorMode = !randomColorMode;
     toggleRandomColorButton.classList.toggle("toggleActive");
   }
+  if (rainbowMode && eraserMode) toggleEraser();
 }
 
 function toggleOpacity() {
@@ -157,6 +158,7 @@ function toggleRandomColors() {
     rainbowMode = !rainbowMode;
     toggleRainbowModeButton.classList.toggle("toggleActive");
   }
+  if (randomColorMode && eraserMode) toggleEraser();
 }
 
 // Checks for left mouse button event and toggles on/off variable to use
@@ -168,21 +170,14 @@ function toggleLeftClickActive(event) {
   }
 }
 
-function toggleGridlines() {
-  showGridlines = !showGridlines;
-  Array.from(gridContainer.children).forEach((tile) => {
-    tile.classList.toggle("show-gridlines");
-  });
-}
-
 // Toggle off conflicting modes when user inputs a color through the color picker
 function changeColor() {
   rainbowMode = false;
   randomColorMode = false;
   toggleRainbowModeButton.classList.remove("toggleActive");
   toggleRandomColorButton.classList.remove("toggleActive");
+  if (eraserMode) toggleEraser();
 }
-
 
 function handleButtonClick({ target: buttonClicked, button: clickId }) {
   if (clickId !== 0) return;
