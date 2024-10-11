@@ -31,19 +31,20 @@ body {
   border: 1px solid black;
 }
 
+
 button {
-  padding: 15px 15px;
-  background-color: rgba(39, 39, 39, 0.695);
-  border: 2px ridge black;
-  border-radius: 5px;
+  background-color: rgb(138, 145, 168);
+  border: 2px solid white;
+
   font-weight: bold;
   color: white;
   height: 50px;
 }
 
 .toggleActive {
-  border-color: yellow;
+  border: 3px solid red !important;
 }
+
 
 .app-container {
   display: flex;
@@ -112,4 +113,13 @@ input {
   display: flex;
   flex-grow: 1;
   user-select: none;
+}
+
+input[type="color" i] {
+  border: 2px solid white;
+  width: 100%;
+}
+
+input[type="color" i]::-webkit-color-swatch-wrapper {
+  padding: 0px;
 }
